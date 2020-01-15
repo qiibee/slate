@@ -535,7 +535,7 @@ api.get_prices_history('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', 'AUD', 3)
 ]
 ```
 
-Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
+Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency, with 1 data point per day. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
 
 ### HTTP Request
 
@@ -547,3 +547,4 @@ Parameter | Default | Description
 --------- | ------- | -----------
 from | None | Loyalty Token contract address.
 to | USD | Comma separated currency symbols list to convert into. For example: USD,EUR,CHF. 
+limit | 30 | The number of data points to return.
