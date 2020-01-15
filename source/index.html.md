@@ -318,6 +318,10 @@ This endpoint retrieves the tokens relevant to the qiibee platform. The `private
 	
 The `public` field contains a list of relevant tokens on the Ethereum main-net. It can be accessed by passing in `public = true` as a parameter.
 
+### HTTP Request
+
+`GET https://api.qiibee.com/tokens`
+
 ## Get specific token
 
 
@@ -414,3 +418,49 @@ Returns address information along with balances for each Loyalty Token and optio
 Parameter | Description
 --------- | -----------
 ADDRESS | The address to query for.
+
+
+# Network
+
+## Get network data (latest block)
+
+```shell
+curl "https://api.qiibee.com/net"
+```
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+api.get_la	test_block()
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "author": "0xdb99f8da29143c1650ba2dcc7c1dbfebfdceefa6",
+  "extraData": "0xde830205078f5061726974792d457468657265756d86312e33362e30826c69",
+  "hash": "0xb84102cb9ff68ff2e25a62790ad29f99bec63f8c1e0abbeb133c8afe88d1bf87",
+  "miner": "0xdb99f8Da29143c1650ba2DCc7c1DBfebFDcEeFA6",
+  "number": 872807,
+  "parentHash": "0xf9b0128c3922bd165e69941aea5cb32a2a8de20d87971b1a473d01d34812f930",
+  "receiptsRoot": "0xf2bebb57f9cb892f1227d1f92d9143c479e7fc86d8b38ab8fb072cf68e58f572",
+  "signature": "b80a1a36d4792806befeb86da19a82bbec5a288878f2e387a588d9fd59a9c02d540b680111ef20daa6b11a3146def94eb221705c9cd7cd98b3625fd7aa5e3d2801",
+  "size": 764,
+  "stateRoot": "0x9f56fe23520d14e0c44aae7f2151f2abd391a34e3631f1c6ba2bc14ce3d1fe6b",
+  "step": "1579086350",
+  "timestamp": 1579086350,
+  "transactions": [
+    "0xf0d660dd0da64f4ae491b2cb22ee17b9dadec0f920fa1e25b702e4306eb3c191"
+  ],
+  "transactionsRoot": "0x7e6b49fd29b5871cd13228ac76604db37f5d007ffbca963417be0dac2936ee85",
+  "chainId": 17224
+}	
+```
+
+Returns data fields of the latest block in the chain alongside the chain id.
+	
+### HTTP Request
+
+`GET https://api.qiibee.com/net`
