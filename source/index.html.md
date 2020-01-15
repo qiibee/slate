@@ -35,6 +35,13 @@ api = qbsdk.Api('my_very_secret_api_key', qbsdk.Mode.live)
 api = qbsdk.Api('my_very_secret_api_key', qbsdk.Mode.sandbox)
 ```
 
+```shell
+# query production
+curl https://api.qiibee.com/tokens
+
+# query sandbox
+curl https://api-sandbox.qiibee.com/tokens
+```
 
 Once you install your SDK, you are able to use 2 types of environments:
 
@@ -155,17 +162,40 @@ api.get_transaction('0x1da1258d04762fba4a566a2a622b58242bbbf014ab4c238003d997bb4
 
 ```shell
 curl "https://api.qiibee.com/transactions/0x1da1258d04762fba4a566a2a622b58242bbbf014ab4c238003d997bb4ef5e07a"
-```
+```	
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "blockHash": "0x0607b2a500db0e90d27f8f44424118218fd10b942a8afa0e46e209f93679eb62",
+  "blockNumber": 869569,
+  "chainId": 17224,
+  "condition": null,
+  "creates": null,
+  "from": "0x853FC3aB19b0FD862f6a1c75055FeB0f0e9922ec",
+  "hash": "0x1da1258d04762fba4a566a2a622b58242bbbf014ab4c238003d997bb4ef5e07a",
+  "input": "0xa9059cbb00000000000000000000000036003f0f6bde4cf2ddeba253f00d0a71b4ee8de6000000000000000000000000000000000000000000000000000000000000000a",
+  "nonce": 128039,
+  "raw": "0xf8aa8301f42780830f424094f2e71f41e670c2823684ac3dbdf48166084e5af380b844a9059cbb00000000000000000000000036003f0f6bde4cf2ddeba253f00d0a71b4ee8de6000000000000000000000000000000000000000000000000000000000000000a8286b4a02e0797295ec111f7de457baa460a14293fbf61d7e4c97b7060619078c0f62456a00b92a93d99265c17ec41a8d43acc20d3ce17efbc652926bafda24d63ec03d977",
+  "to": "0x36003f0f6bde4cf2ddeba253f00d0a71b4ee8de6",
+  "transactionIndex": 0,
+  "value": "10",
+  "status": true,
+  "contract": "0xF2e71f41E670C2823684AC3DBDF48166084e5Af3",
+  "timestamp": 1578981311,
+  "confirms": 7,
+  "token": {
+    "contractAddress": "0xf2e71f41e670c2823684ac3dbdf48166084e5af3",
+    "decimals": 18,
+    "description": "This is a test coin",
+    "name": "Test Coin",
+    "rate": 10,
+    "symbol": "TEST",
+    "totalSupply": "37500000000000000000000000",
+    "website": "qiibee.com"
+  },
+  "state": "processed"
 }
 ```
 
@@ -181,7 +211,7 @@ This endpoint retrieves a specific transaction by its hash.
 
 Parameter | Description
 --------- | -----------
-HASH | The ID of the kitten to retrieve
+HASH | Blockchain hash (identifier) of the transaction.
 
 ## Get a raw unsigned transaction
 
@@ -233,3 +263,104 @@ Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
 
+
+# Tokens
+
+## Get all tokens
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+api.get_tokens()
+```
+
+```shell
+curl "https://api.qiibee.com/transactions"
+```
+
+> The above command returns JSON structured like this:
+
+
+```json
+
+{
+  "private": [
+      {
+      "contractAddress": "0x883ed48b3210082cf82fb92ce81f0b17bdec4f81",
+      "decimals": 18,
+      "description": "Participate in surveys and get rewarded with Survey Token which you can exchange for QBX. Click on \"Learn more\" to participate.",
+      "name": "Survey Token",
+      "rate": 1,
+      "symbol": "SVT",
+      "totalSupply": "1000000000000000000000000",
+      "website": "https://qiibee.com",
+      "logoUrl": "https://tokens.qiibee.com/svt/logo.png"
+    }
+  ],
+  "public": [
+      {
+      "contractAddress": "0x2467aa6b5a2351416fd4c3def8462d841feeecec",
+      "symbol": "QBX",
+      "name": "qiibeeToken",
+      "totalSupply": "1242352941000000000000000000",
+      "decimals": 18,
+      "balance": "0",
+      "description": "With qiibee, businesses around the world can run their loyalty programs on the blockchain.Exchange loyalty tokens to QBX and enter the crypto world",
+      "website": "https://www.qiibee.com",
+      "logoUrl": "https://s3.eu-central-1.amazonaws.com/tokens.qiibee/qbx/logo.png"
+    }
+  ]
+}
+```
+
+This endpoint retrieves the tokens relevant to the qiibee platform. The `private` field contains a list of tokens deployed on the private blockchain.
+	
+The `public` field contains a list of relevant tokens on the Ethereum main-net. It can be accessed by passing in `public = true` as a parameter.
+
+## Get specific token
+
+
+```shell
+curl "https://api.qiibee.com/tokens/0x883ed48b3210082cf82fb92ce81f0b17bdec4f8"
+```
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+api.get_token('0x883ed48b3210082cf82fb92ce81f0b17bdec4f8')
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "private": {
+    "contractAddress": "0x883ed48b3210082cf82fb92ce81f0b17bdec4f81",
+    "decimals": 18,
+    "description": "Participate in surveys and get rewarded with Survey Token which you can exchange for QBX. Click on \"Learn more\" to participate.",
+    "name": "Survey Token",
+    "rate": 1,
+    "symbol": "SVT",
+    "totalSupply": "1000000000000000000000000",
+    "website": "https://qiibee.com",
+    "balance": "0",
+    "logoUrl": "https://tokens.qiibee.com/svt/logo.png"
+  }
+}
+```
+
+Returns a specific Loyalty Token on the qiibee chain.
+
+
+
+### HTTP Request
+
+`GET https://api.qiibee.com/tokens/<CONTRACT_ADDRESS>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+CONTRACT_ADDRESS | The CONTRACT_ADDRESS of the token to fetch.
