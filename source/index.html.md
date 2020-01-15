@@ -364,3 +364,53 @@ Returns a specific Loyalty Token on the qiibee chain.
 Parameter | Description
 --------- | -----------
 CONTRACT_ADDRESS | The CONTRACT_ADDRESS of the token to fetch.
+
+# Addresses
+
+
+## Get a specific address
+
+```shell
+curl "https://api.qiibee.com/addresses/0x2A381d5701255B20656e5A2332F8D9038CfF5Dd2"
+```
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+api.get_address('0x2A381d5701255B20656e5A2332F8D9038CfF5Dd2')
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "transactionCount": 5,
+  "balances": {
+    "private": {
+      "SVT": {
+        "balance": "892300000000000000000000",
+        "contractAddress": "0x883ed48b3210082cf82fb92ce81f0b17bdec4f81"
+      },
+      "TEST": {
+        "balance": "890000000000000000000000",
+        "contractAddress": "0xf2e71f41e670c2823684ac3dbdf48166084e5af3"
+      },
+    }
+  }
+}
+```
+
+Returns address information along with balances for each Loyalty Token and optionally each relevant main-net token.
+
+
+
+### HTTP Request
+
+`GET https://api.qiibee.com/address/<ADDRESS>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ADDRESS | The address to query for.
