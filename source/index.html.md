@@ -432,7 +432,7 @@ curl "https://api.qiibee.com/net"
 import qbsdk
 
 api = qbsdk.Api('my_very_secret_api_key')
-api.get_la	test_block()
+api.get_latest_block()
 ```
 
 > The above command returns JSON structured like this:
@@ -464,3 +464,86 @@ Returns data fields of the latest block in the chain alongside the chain id.
 ### HTTP Request
 
 `GET https://api.qiibee.com/net`
+
+# Prices
+
+## Get current prices
+
+```shell
+curl "https://api.qiibee.com/prices/?from=0x883ed48b3210082cf82fb92ce81f0b17bdec4f81&to=CHF,EUR"
+```
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+api.get_prices('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', ['USD', 'CHF'])
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "CHF": "0.0210492399",
+  "EUR": "0.0209613126"
+}
+```
+
+Returns the FIAT price of one unit of a given Loyalty Token. This endpoint uses a third-party provider to get the ETH echange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
+
+### HTTP Request
+
+`GET https://api.qiibee.com/prices`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+from | None | Loyalty Token contract address.
+to | USD | Comma separated currency symbols list to convert into. For example: USD,EUR,CHF. 
+
+
+## Get price history
+
+```shell
+curl "https://api.qiibee.com/prices/history?from= 0x883ed48b3210082cf82fb92ce81f0b17bdec4f81&to=AUD&limit=3"
+```
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+api.get_prices_history('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', 'AUD', 3)
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "time": 1578873600,
+    "price": 0.012641263091352615
+  },
+  {
+    "time": 1578960000,
+    "price": 0.011690807295838489
+  },
+  {
+    "time": 1579046400,
+    "price": 0.011875396707207064
+  }
+]
+```
+
+Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
+
+### HTTP Request
+
+`GET https://api.qiibee.com/prices/history`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+from | None | Loyalty Token contract address.
+to | USD | Comma separated currency symbols list to convert into. For example: USD,EUR,CHF. 
