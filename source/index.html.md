@@ -19,7 +19,7 @@ search: true
 
 Welcome to the qiibee API!
 
-We have language bindings in Python (more languages coming soon) and additional examples in Shell. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Python (more languages coming soon) and additional examples using the cURL command (Shell tab). You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Environments
 
