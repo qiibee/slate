@@ -213,6 +213,44 @@ Parameter | Description
 --------- | -----------
 HASH | Blockchain hash (identifier) of the transaction.
 
+
+## Construct and send signed brand transaction
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_very_secret_api_key')
+
+brand_address_private_key = 'my_very_secret_brand_private_key'
+token_symbol = 'SVT'
+
+wallet = qbsdk.Wallet(brand_address_private_key, token_symbol, api, qbsdk.TransferStrategy.brand)
+wallet.setup()
+transfer_receiver = 'address_of_receiver'
+
+send_transaction(transfer_receiver, i)
+```
+
+```shell
+# Constructing and signing transactions in shell is not supported.
+# Some implementation of the web3 library or alternative is required to achieve that
+```
+
+> The above command returns a SDK-specific data type with the following relevant fields:
+
+```json
+{
+	"hash": "0x99d3a9b58720e4d6e6024799719853ceca2d69947af67b675321a736d8803e79",
+	"state": "pending" 
+}
+```
+
+This operation allows you to construct a transaction with the correct parameters, sign it with your brand private key and send it. Thus it is a multi-step operation that is fully supported only at the level of the SDK.
+
+To achieve this using the raw endpoints you would need to make use of a library equivalent to [`web3`](https://github.com/ethereum/web3.js/) to construct the transaction and sign it.
+
+The returned value containts the transaction `hash` that allows you to track transaction completion.
+
 ## Get a raw unsigned transaction
 
 ```python
@@ -246,7 +284,11 @@ curl "https://api.qiibee.com/transactions/raw?from=0x87265a62c60247f862b91494230
 }
 ```
 
-This endpoint deletes a specific kitten.
+This endpoint returns a raw transaction (unsigned) which uses the nonce based on the blockchain `transactionCount` for that address.
+
+
+<aside class="warning"> If an SDK is available for your programming language, we highly recommend you use the `Wallet` class to construct valid transactions and send them instead of this function, since it takes care of transaction construction and signing for you. </aside>
+
 
 ### HTTP Request
 
@@ -262,6 +304,51 @@ contractAddress | None | Loyalty Token contract address. (Use either the symbol 
 symbol | None | Loyalty Token symbol. (Use either the symbol or the contractAddress, not both)
 transferAmount | None | Amount of loyalty tokens being sent (in wei)
 
+## Post signed transaction
+
+
+```python
+import qbsdk
+
+api = qbsdk.Api('my_secret_api')
+
+signed_tx_string = '0xf8aa8305ee6e80830f424094f80c1e40d50f383330a886f03f147f49342ad7c780b844a9059cbb00000000000000000000000087265a62c60247f862b9149423061b36b460f4bb000000000000000000000000000000000000000000000000000000000000000a8286b5a0e8a236e4b57e79ee0eec88d8bc7a7ef1c44a1d181bad366621e72c341490e550a0683ce6443acc4384ea2b18fcaba416b8f7379963b6a0c596cea423cade502eb3'
+
+api.post_transaction(signed_tx_string)
+```
+
+```shell
+curl -d '{"data": "0xf8aa8305ee6e80830f424094f80c1e40d50f383330a886f03f147f49342ad7c780b844a9059cbb00000000000000000000000087265a62c60247f862b9149423061b36b460f4bb000000000000000000000000000000000000000000000000000000000000000a8286b5a0e8a236e4b57e79ee0eec88d8bc7a7ef1c44a1d181bad366621e72c341490e550a0683ce6443acc4384ea2b18fcaba416b8f7379963b6a0c596cea423cade502eb3" }' -H "Content-Type: application/json" -X POST  https://apitesting.qiibee.com/transactions
+```
+> The above command returns JSON structured like this:
+
+```json
+{ 
+	"to":"0x87265a62c60247f862b9149423061b36b460f4bb",
+	"from":"0x36003f0f6bde4cf2ddeba253f00d0a71b4ee8de6",
+	"contract":"0xf80c1e40d50f383330a886f03f147f49342ad7c7",
+	"hash":"0x1a5eefc67c0e98709bd0954827fc68312f5596a7e9c3140dfe94f8c53925769b",
+	"nonce":388718,
+	"state":"pending",
+	"status":"pending",
+	"value":"10",
+	"chainId":17225
+}
+```
+
+Sends a signed transaction to the qiibee chain. 
+
+<aside class="warning"> If an SDK is available for your programming language, we highly recommend you use the `Wallet` class to send transactions, since it takes care of transaction construction and signing for you. </aside>
+
+### HTTP Request
+
+`POST https://api.qiibee.com/transactions`
+
+### JSON body Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+data | None | Signed transaction data in HEX format.
 
 # Tokens
 
