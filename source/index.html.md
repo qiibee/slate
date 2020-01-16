@@ -77,7 +77,7 @@ curl "api_endpoint_here"
 
 qiibee uses API keys to allow access particular endpoints that are only accessible to brands. 
 
-For those particular endpoints it is expected that the the request contains the following header:
+For those particular endpoints it is expected that the request contains the following header:
 
 `Authorization: Bearer my_very_secret_api_key `
 
