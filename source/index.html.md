@@ -215,32 +215,21 @@ HASH | Blockchain hash (identifier) of the transaction.
 
 ## Get a raw unsigned transaction
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
 ```python
-import kittn
+import qbsdk
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+api = qbsdk.Api('my_secret_api')
+
+from_address = '0x87265a62c60247f862b9149423061b36b460f4bb'
+to_address = '0xb99c958777f024bc4ce992b2a0efb2f1f50a4dcf'
+value = 1000000000000000000
+contract_address = '0x883ed48b3210082cf82fb92ce81f0b17bdec4f81'
+api.get_raw_transaction(from, to, value)
 ```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+curl "https://api.qiibee.com/transactions/0x1da1258d04762fba4a566a2a622b58242bbbf014ab4c238003d997bb4ef5e07a"
+```	
 
 > The above command returns JSON structured like this:
 
@@ -535,7 +524,7 @@ api.get_prices_history('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', 'AUD', 3)
 ]
 ```
 
-Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency, with 1 data point per day. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
+Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
 
 ### HTTP Request
 
