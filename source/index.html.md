@@ -224,19 +224,25 @@ from_address = '0x87265a62c60247f862b9149423061b36b460f4bb'
 to_address = '0xb99c958777f024bc4ce992b2a0efb2f1f50a4dcf'
 value = 1000000000000000000
 contract_address = '0x883ed48b3210082cf82fb92ce81f0b17bdec4f81'
-api.get_raw_transaction(from, to, value)
+api.get_raw_transaction(from, to, value, contract_address)
 ```
 
 ```shell
-curl "https://api.qiibee.com/transactions/0x1da1258d04762fba4a566a2a622b58242bbbf014ab4c238003d997bb4ef5e07a"
+curl "https://api.qiibee.com/transactions/raw?from=0x87265a62c60247f862b9149423061b36b460f4bb&to=0xb99c958777f024bc4ce992b2a0efb2f1f50a4dcf&symbol=SVT&transferAmount=10"
 ```	
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "from": "0x87265a62c60247f862b9149423061b36b460f4bb",
+  "nonce": "0x14",
+  "gasPrice": "0x0",
+  "gasLimit": "0xf4240",
+  "to": "0x883ed48b3210082cf82fb92ce81f0b17bdec4f81",
+  "value": "0x0",
+  "data": "0xa9059cbb000000000000000000000000b99c958777f024bc4ce992b2a0efb2f1f50a4dcf000000000000000000000000000000000000000000000000000000000000000a",
+  "chainId": 17224
 }
 ```
 
@@ -244,13 +250,17 @@ This endpoint deletes a specific kitten.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`GET https://api.qiibee.com/transactions/raw`
 
-### URL Parameters
+### Query Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+Parameter | Default | Description
+--------- | ------- | -----------
+from | None | Address of the sender
+to | None | Receiver address of the loyalty tokens
+contractAddress | None | Loyalty Token contract address. (Use either the symbol or the contractAddress, not both)
+symbol | None | Loyalty Token symbol. (Use either the symbol or the contractAddress, not both)
+transferAmount | None | Amount of loyalty tokens being sent (in wei)
 
 
 # Tokens
