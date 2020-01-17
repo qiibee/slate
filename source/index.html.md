@@ -28,7 +28,7 @@ We have language bindings in Python (more languages coming soon) and additional 
 ```python
 import qbsdk
 
-# for production
+# for going live
 api = qbsdk.Api('my_very_secret_api_key', qbsdk.Mode.live)
 
 # for sandbox
@@ -36,7 +36,7 @@ api = qbsdk.Api('my_very_secret_api_key', qbsdk.Mode.sandbox)
 ```
 
 ```shell
-# query production
+# query live
 curl https://api.qiibee.com/tokens
 
 # query sandbox
@@ -49,7 +49,7 @@ Once you install your SDK, you are able to use 2 types of environments:
 * live - Base url: `https://api.qiibee.com`
 
 
-The `sandbox` environment is to be used for testing your code under conditions that replicate the `production` environment but using tokens that are not backed by real value, to avoid any risk of loss of funds and to detect software bugs early.
+The `sandbox` environment is to be used for testing your code under conditions that replicate the `live` environment but using tokens that are not backed by real value, to avoid any risk of loss of funds and to detect software bugs early.
 
 The `live` environment is to be used to run your production application. 
 
