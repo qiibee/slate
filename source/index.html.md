@@ -287,7 +287,7 @@ curl "https://api.qiibee.com/transactions/raw?from=0x87265a62c60247f862b91494230
 This endpoint returns a raw transaction (unsigned) which uses the nonce based on the blockchain `transactionCount` for that address.
 
 
-<aside class="warning"> If an SDK is available for your programming language, we highly recommend you use the `Wallet` class to construct valid transactions and send them instead of this function, since it takes care of transaction construction and signing for you. </aside>
+<aside class="warning"> If an SDK is available for your programming language, we highly recommend you to use the `Wallet` class to construct valid transactions and send them instead of this function, since it takes care of transaction construction and signing for you. </aside>
 
 
 ### HTTP Request
@@ -318,7 +318,7 @@ api.post_transaction(signed_tx_string)
 ```
 
 ```shell
-curl -d '{"data": "0xf8aa8305ee6e80830f424094f80c1e40d50f383330a886f03f147f49342ad7c780b844a9059cbb00000000000000000000000087265a62c60247f862b9149423061b36b460f4bb000000000000000000000000000000000000000000000000000000000000000a8286b5a0e8a236e4b57e79ee0eec88d8bc7a7ef1c44a1d181bad366621e72c341490e550a0683ce6443acc4384ea2b18fcaba416b8f7379963b6a0c596cea423cade502eb3" }' -H "Content-Type: application/json" -X POST  https://apitesting.qiibee.com/transactions
+curl -d '{"data": "0xf8aa8305ee6e80830f424094f80c1e40d50f383330a886f03f147f49342ad7c780b844a9059cbb00000000000000000000000087265a62c60247f862b9149423061b36b460f4bb000000000000000000000000000000000000000000000000000000000000000a8286b5a0e8a236e4b57e79ee0eec88d8bc7a7ef1c44a1d181bad366621e72c341490e550a0683ce6443acc4384ea2b18fcaba416b8f7379963b6a0c596cea423cade502eb3" }' -H "Content-Type: application/json" -X POST  https://api.qiibee.com/transactions
 ```
 > The above command returns JSON structured like this:
 
@@ -575,7 +575,7 @@ api.get_prices('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', ['USD', 'CHF'])
 }
 ```
 
-Returns the FIAT price of one unit of a given Loyalty Token. This endpoint uses a third-party provider to get the ETH echange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
+Returns the FIAT price of one unit of a given Loyalty Token. This endpoint uses a third-party provider to get the ETH echange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
 
 ### HTTP Request
 
@@ -592,7 +592,7 @@ to | USD | Comma separated currency symbols list to convert into. For example: U
 ## Get price history
 
 ```shell
-curl "https://api.qiibee.com/prices/history?from= 0x883ed48b3210082cf82fb92ce81f0b17bdec4f81&to=AUD&limit=3"
+curl "https://api.qiibee.com/prices/history?from=0x883ed48b3210082cf82fb92ce81f0b17bdec4f81&to=AUD&limit=3"
 ```
 
 ```python
@@ -621,7 +621,7 @@ api.get_prices_history('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', 'AUD', 3)
 ]
 ```
 
-Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH Exchange rate is fetched from the Coinsuper exchange.
+Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
 
 ### HTTP Request
 
