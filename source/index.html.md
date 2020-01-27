@@ -49,13 +49,13 @@ Once you install your SDK, you are able to use 2 types of environments:
 * live - Base url: `https://api.qiibee.com`
 
 
-The `sandbox` environment is to be used for testing your code under conditions that replicate the `live` environment but using tokens that are not backed by real value, to avoid any risk of loss of funds and to detect software bugs early.
+The `sandbox` environment is to be used for testing your code under conditions that replicate the `live` environment but using test tokens to detect software bugs early.
 
 The `live` environment is to be used to run your production application. 
 
-The 2 environments are completely disjoint and use separate API keys, available on request. Tokens and transactions on the `sandbox` cannot be migrated automatically to the `live` environment.
+The 2 environments are completely separate and use separate API keys, available on request. Loyalty tokens and transactions on the `sandbox` cannot be migrated automatically to the `live` environment.
 
-To switch to the `live` environment, you would have to make sure a token has been created for production use, and that you provide the correct mode (`live` or `sandbox`) as a parameter to the SDK or switch the base API url as shown above, if you are using the API directly.
+To switch to the `live` environment, you would have to make sure a loyalty token has been created for production use, and that you provide the correct mode (`live` or `sandbox`) as a parameter to the SDK or switch the base API url as shown above, if you are using the API directly.
 
 # Authentication
 
@@ -577,6 +577,8 @@ api.get_prices('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', ['USD', 'CHF'])
 
 Returns the FIAT price of one unit of a given Loyalty Token. This endpoint uses a third-party provider to get the ETH echange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
 
+This can be used in case the loyalty program decided to peg the loyalty token to QBX.
+
 ### HTTP Request
 
 `GET https://api.qiibee.com/prices`
@@ -622,6 +624,8 @@ api.get_prices_history('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', 'AUD', 3)
 ```
 
 Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
+
+This can be used in case the loyalty program decided to peg the loyalty token to QBX.
 
 ### HTTP Request
 
