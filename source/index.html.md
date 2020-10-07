@@ -137,6 +137,9 @@ curl "https://api.qiibee.com/transactions"
 
 This endpoint retrieves all transactions ordered descendingly by their timestamp. It allows paging and filters using the query parameters described below.
 
+
+<aside class="warning"> This endpoint is not yet supported for no-wallet loyalty contracts. </aside>
+
 ### HTTP Request
 
 `GET https://api.qiibee.com/transactions`
@@ -303,6 +306,7 @@ to | None | Receiver address of the loyalty tokens
 contractAddress | None | Loyalty Token contract address. (Use either the symbol or the contractAddress, not both)
 symbol | None | Loyalty Token symbol. (Use either the symbol or the contractAddress, not both)
 transferAmount | None | Amount of loyalty tokens being sent (in wei)
+txType | transfer | Can be either `transfer`, `earn`, `redeem`, `debit`. The latter 3 create a transaction for the no-wallet contract, and `transfer` creates a transaction for the wallet contract.
 
 ## Post signed transaction
 
@@ -436,7 +440,8 @@ api.get_token('0x883ed48b3210082cf82fb92ce81f0b17bdec4f8')
     "totalSupply": "1000000000000000000000000",
     "website": "https://qiibee.com",
     "balance": "0",
-    "logoUrl": "https://tokens.qiibee.com/svt/logo.png"
+    "logoUrl": "https://tokens.qiibee.com/svt/logo.png",
+    "type": "wallet"
   }
 }
 ```
