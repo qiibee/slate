@@ -580,7 +580,7 @@ api.get_prices('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', ['USD', 'CHF'])
 }
 ```
 
-Returns the FIAT price of one unit of a given Loyalty Token. This endpoint uses a third-party provider to get the ETH echange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
+In case the loyalty program decided to peg the loyalty token to QBX, this returns the FIAT price of one unit of a given Loyalty Token. This endpoint uses a third-party provider to get the ETH echange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
 
 This can be used in case the loyalty program decided to peg the loyalty token to QBX.
 
@@ -628,7 +628,7 @@ api.get_prices_history('0x883ed48b3210082cf82fb92ce81f0b17bdec4f81', 'AUD', 3)
 ]
 ```
 
-Returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
+In case the loyalty program decided to peg the loyalty token to QBX, this returns the historical FIAT price values of one unit of a given Loyalty Token for a desired currency. This endpoint uses a third-party provider to get the ETH exchange rate. The QBX/ETH exchange rate is fetched from the Coinsuper exchange.
 
 This can be used in case the loyalty program decided to peg the loyalty token to QBX.
 
